@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.22.0)
 project(hello_world)
 
 include(FetchContent)
-     
+
+# Generate compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Dependencies
 set(RAYLIB_VERSION 5.0)
 
