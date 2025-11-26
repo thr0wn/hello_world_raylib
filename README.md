@@ -10,10 +10,10 @@ CXX=g++ cmake -S . -B ./build && cmake --build build
 
 ### Debug
 ```shell
-CXX=g++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/hellow_world/hello_world
+CXX=g++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/hello_world/hello_world
 ```
 
 ### Run
 ```shell
-./build/hellow_world/hello_world
+./build/hello_world/hello_world
 ```
