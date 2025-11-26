@@ -5,12 +5,12 @@ Just a cpp hello world with raylib built with cmake.
 
 ### Build
 ```shell
-cmake -S . -B ./build && cmake --build build
+CXX=g++ cmake -S . -B ./build && cmake --build build
 ```
 
 ### Debug
 ```shell
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/hellow_world/hello_world
+CXX=g++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/hellow_world/hello_world
 ```
 
 ### Run
