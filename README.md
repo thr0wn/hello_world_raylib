@@ -17,3 +17,8 @@ CXX=g++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && g
 ```shell
 ./build/hello_world/hello_world
 ```
+
+### Watch with nodemon
+```shell
+npx nodemon --exec "cmake -S . -B build && cmake --build build && ./build/hello_world/hello_world" --watch src -e cpp,hpp,txt
+```
