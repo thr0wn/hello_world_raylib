@@ -10,7 +10,7 @@ cmake -S . -B ./build && cmake --build build
 
 ### Debug
 ```shell
-CXX=g++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/hello_world/exe
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/hello_world/exe
 ```
 
 ### Run
