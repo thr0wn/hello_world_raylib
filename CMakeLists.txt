@@ -32,14 +32,14 @@ add_compile_options(-Wno-enum-compare)
 # library
 set(LIBRARY_NAME game-lib)
 add_library(${LIBRARY_NAME}
-  "${CMAKE_SOURCE_DIR}/src/game-lib/hello_world.cpp"
-  "${CMAKE_SOURCE_DIR}/src/game-lib/hello_world.hpp"
+  "${CMAKE_SOURCE_DIR}/src/lib/hello_world.cpp"
+  "${CMAKE_SOURCE_DIR}/src/lib/hello_world.hpp"
 )
 target_link_libraries(${LIBRARY_NAME} PUBLIC
   raylib
   raygui
 )
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/src/game-lib")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/src/lib")
 
 # executable
 set(EXECUTABLE_NAME exe)
