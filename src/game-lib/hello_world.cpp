@@ -1,10 +1,6 @@
-#include "raylib.h"
-#include <iostream>
+#include "hello_world.hpp"
 
-#define RAYGUI_IMPLEMENTATION
-#include "raygui.h"
-
-int main() {
+void hello_world() {
   InitWindow(300, 300, "Hello World with raylib.");
 
   while (!WindowShouldClose()) {

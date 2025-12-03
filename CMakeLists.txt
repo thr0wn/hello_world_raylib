@@ -29,12 +29,24 @@ add_subdirectory("${raygui_SOURCE_DIR}/projects/CMake")
 # raygui has a lot of warnings of -Wenum-compare
 add_compile_options(-Wno-enum-compare)
 
-# default executable
+# library
+set(LIBRARY_NAME game-lib)
+add_library(${LIBRARY_NAME}
+  "${CMAKE_SOURCE_DIR}/src/game-lib/hello_world.cpp"
+  "${CMAKE_SOURCE_DIR}/src/game-lib/hello_world.hpp"
+)
+target_link_libraries(${LIBRARY_NAME} PUBLIC
+  raylib
+  raygui
+)
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/src/game-lib")
+
+# executable
 set(EXECUTABLE_NAME exe)
 add_executable(${EXECUTABLE_NAME}
-  "src/hello_world.cpp"
+  "${CMAKE_SOURCE_DIR}/src/main.cpp"
 )
-target_link_libraries(${EXECUTABLE_NAME} raylib raygui)
+target_link_libraries(${EXECUTABLE_NAME} PUBLIC ${LIBRARY_NAME})
 set_target_properties(${EXECUTABLE_NAME} PROPERTIES
 RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set_property(TARGET ${EXECUTABLE_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY $<TARGET_FILE_DIR:${PROJECT_NAME}>)
