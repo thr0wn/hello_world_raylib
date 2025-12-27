@@ -1,6 +1,6 @@
 [![](https://img.shields.io/badge/c++-black?logo=c++&style=for-the-badge)](https://learnxinyminutes.com/c++/)
 
-<img width="292" height="299" alt="image" src="https://github.com/user-attachments/assets/616d8d02-45d5-48fc-b845-8965b50eed12" />
+<img width="287" height="284" alt="image" src="https://github.com/user-attachments/assets/1b74f362-daa6-4a58-803e-68a42d540fc3" />
 
 ## Hello World in C++
 Just a cpp hello world with raylib built with cmake.
