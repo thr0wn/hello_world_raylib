@@ -1,10 +1,20 @@
-cmake_minimum_required(VERSION 3.22.0)
-project(hello_world)
+cmake_minimum_required(VERSION 3.5.0)
+project(hello_world VERSION 1.0.0)
 
 include(FetchContent)
 
+# build type and others
+# ----------------------------------------------------------------------------------------
+set(CMAKE_BUILD_TYPE Debug)
+
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# c standard
+# ----------------------------------------------------------------------------------------
+set(CMAKE_CXX_STANDARD          17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS        OFF)
 
 # compile options
 # ----------------------------------------------------------------------------------------
@@ -64,3 +74,11 @@ target_link_libraries(${EXECUTABLE_NAME} PUBLIC ${LIBRARY_NAME})
 set_target_properties(${EXECUTABLE_NAME} PROPERTIES
 RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set_property(TARGET ${EXECUTABLE_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+# config file
+# ----------------------------------------------------------------------------------------
+configure_file(
+  "${CMAKE_SOURCE_DIR}/src/config/config.h.in"
+  "${CMAKE_BINARY_DIR}/config/config.h" ESCAPE_QUOTES
+)
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_BINARY_DIR}")
