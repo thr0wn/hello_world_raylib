@@ -1,6 +1,6 @@
-#include "hello_world.hpp"
+#include "lib/hello-world.hpp"
 
 int main() {
-  hello_world();  
+  helloWorld();  
   return 0;
 }
