@@ -1,3 +1,3 @@
 #include "raylib.h"
 
-void helloWorld();
+void hello_world();

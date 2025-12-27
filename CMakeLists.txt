@@ -6,56 +6,42 @@ include(FetchContent)
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# compile options
-# ----------------------------------------------------------------------------------------
-if(CMAKE_CXX_COMPILER_ID MATCHES "GNU") 
-  add_compile_options(
-    -Wall
-    -Wno-enum-compare
-    -Wno-error=maybe-uninitialized
-  )
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-  add_compile_options(/W4)
-endif()
-
-# dependencies
-# ----------------------------------------------------------------------------------------
 # Dependency: raylib
 set(RAYLIB_VERSION 5.0)
 FetchContent_Declare(
-  raylib
-  GIT_REPOSITORY https://github.com/raysan5/raylib
-  GIT_TAG ${RAYLIB_VERSION}
-  GIT_SHALLOW TRUE
+    raylib
+    DOWNLOAD_EXTRACT_TIMESTAMP OFF
+    URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+    FIND_PACKAGE_ARGS
 )
 FetchContent_MakeAvailable(raylib)
 
 # Dependency: raygui (no root CMakeList.txt)
 set(RAYGUI_VERSION 4.0)
 FetchContent_Declare(
-  raygui
-  GIT_REPOSITORY https://github.com/raysan5/raygui
-  GIT_TAG ${RAYGUI_VERSION}
-  GIT_SHALLOW TRUE
+    raygui
+    DOWNLOAD_EXTRACT_TIMESTAMP OFF
+    URL https://github.com/raysan5/raygui/archive/refs/tags/${RAYGUI_VERSION}.tar.gz
+    FIND_PACKAGE_ARGS
 )
 FetchContent_MakeAvailable(raygui)
 add_subdirectory("${raygui_SOURCE_DIR}/projects/CMake")
+# raygui has a lot of warnings of -Wenum-compare
+add_compile_options(-Wno-enum-compare)
 
-# library setup
-# ----------------------------------------------------------------------------------------
+# library
 set(LIBRARY_NAME game-lib)
-add_library(${LIBRARY_NAME} STATIC
-  "${CMAKE_SOURCE_DIR}/src/lib/hello-world.cpp"
-  "${CMAKE_SOURCE_DIR}/src/lib/hello-world.hpp"
+add_library(${LIBRARY_NAME}
+  "${CMAKE_SOURCE_DIR}/src/lib/hello_world.cpp"
+  "${CMAKE_SOURCE_DIR}/src/lib/hello_world.hpp"
 )
 target_link_libraries(${LIBRARY_NAME} PUBLIC
   raylib
   raygui
 )
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/src")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/src/lib")
 
-# executable setup
-# ----------------------------------------------------------------------------------------
+# executable
 set(EXECUTABLE_NAME exe)
 add_executable(${EXECUTABLE_NAME}
   "${CMAKE_SOURCE_DIR}/src/main.cpp"
