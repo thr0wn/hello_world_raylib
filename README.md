@@ -1,6 +1,6 @@
 [![](https://img.shields.io/badge/c++-black?logo=c++&style=for-the-badge)](https://learnxinyminutes.com/c++/)
 
-## Hello world
+## Hello World in C++
 Just a cpp hello world with raylib built with cmake.
 
 ### Build
@@ -13,14 +13,14 @@ cmake --build build
 
 ### Run
 ```shell
-./build/hello_world/exe
+./build/hello-world/exe
 ```
 
 ### Debug
 ```shell
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
-gdb ./build/hello_world/exe
+gdb ./build/hello-world/exe
 ```
 
 ### Tests
@@ -32,5 +32,5 @@ cmake --build build --target unit-tests
 
 ### Watch with nodemon
 ```shell
-npx nodemon --exec "cmake -S . -B build && cmake --build build && ./build/hello_world/exe" --watch src -e cpp,hpp,txt
+npx nodemon --exec "cmake -S . -B build && cmake --build build && ./build/hello-world/exe" --watch src -e cpp,hpp,txt
 ```

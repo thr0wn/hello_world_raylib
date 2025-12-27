@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.0)
-project(hello_world VERSION 1.0.0)
+project(hello-world VERSION 1.0.0)
 
 include(FetchContent)
 
