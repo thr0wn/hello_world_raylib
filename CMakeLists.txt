@@ -7,7 +7,10 @@ include(FetchContent)
 # ----------------------------------------------------------------------------------------
 set(CMAKE_BUILD_TYPE Debug)
 
-# Generate compile_commands.json
+# enable unit tests
+option(ENABLE_TEST "Enable unit testing" ON)
+
+# generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # c standard
@@ -30,8 +33,12 @@ endif()
 
 # dependencies
 # ----------------------------------------------------------------------------------------
-# Dependency: raylib
+# versions
 set(RAYLIB_VERSION 5.0)
+set(RAYGUI_VERSION 4.0)
+set(CATCH2_VERSION v3.5.3)
+
+# dependency: raylib
 FetchContent_Declare(
   raylib
   GIT_REPOSITORY https://github.com/raysan5/raylib
@@ -40,8 +47,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(raylib)
 
-# Dependency: raygui (no root CMakeList.txt)
-set(RAYGUI_VERSION 4.0)
+# dependency: raygui (no root CMakeList.txt)
 FetchContent_Declare(
   raygui
   GIT_REPOSITORY https://github.com/raysan5/raygui
@@ -51,12 +57,22 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raygui)
 add_subdirectory("${raygui_SOURCE_DIR}/projects/CMake")
 
-# library setup
+# dependency: catch2
+if(ENABLE_TEST)
+    FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2
+        GIT_TAG ${CATCH2_VERSION}
+        GIT_SHALLOW TRUE)
+    FetchContent_MakeAvailable(Catch2)
+endif()
+
+# target library
 # ----------------------------------------------------------------------------------------
 set(LIBRARY_NAME game-lib)
 add_library(${LIBRARY_NAME} STATIC
-  "${CMAKE_SOURCE_DIR}/src/lib/hello-world.cpp"
-  "${CMAKE_SOURCE_DIR}/src/lib/hello-world.hpp"
+  "${CMAKE_SOURCE_DIR}/src/lib/hello-world.cc"
+  "${CMAKE_SOURCE_DIR}/src/lib/hello-world.h"
 )
 target_link_libraries(${LIBRARY_NAME} PUBLIC
   raylib
@@ -64,16 +80,26 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
 )
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/src")
 
-# executable setup
+# target executable
 # ----------------------------------------------------------------------------------------
 set(EXECUTABLE_NAME exe)
 add_executable(${EXECUTABLE_NAME}
-  "${CMAKE_SOURCE_DIR}/src/main.cpp"
+  "${CMAKE_SOURCE_DIR}/src/main.cc"
 )
 target_link_libraries(${EXECUTABLE_NAME} PUBLIC ${LIBRARY_NAME})
 set_target_properties(${EXECUTABLE_NAME} PROPERTIES
 RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set_property(TARGET ${EXECUTABLE_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+
+# target tests
+# ----------------------------------------------------------------------------------------
+set(TEST_NAME "unit-tests")
+
+add_executable(${TEST_NAME}
+  "${CMAKE_SOURCE_DIR}/tests/main.cc"
+)
+target_link_libraries(${TEST_NAME} PUBLIC ${LIBRARY_NAME} Catch2::Catch2WithMain)
 
 # config file
 # ----------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-#include "lib/hello-world.hpp"
+#include "lib/hello-world.h"
 
 int main() {
   helloWorld();  

@@ -1,4 +1,4 @@
-#include "hello-world.hpp"
+#include "hello-world.h"
 
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"

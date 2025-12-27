@@ -11,6 +11,11 @@ cmake -S . -B ./build
 cmake --build build
 ```
 
+### Run
+```shell
+./build/hello_world/exe
+```
+
 ### Debug
 ```shell
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
@@ -18,9 +23,10 @@ cmake --build build
 gdb ./build/hello_world/exe
 ```
 
-### Run
+### Tests
 ```shell
-./build/hello_world/exe
+cmake -S . -B build && cmake --build build --target unit-tests
+./build/tests/unit-tests
 ```
 
 ### Watch with nodemon
