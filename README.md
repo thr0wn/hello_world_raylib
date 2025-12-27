@@ -25,7 +25,8 @@ gdb ./build/hello_world/exe
 
 ### Tests
 ```shell
-cmake -S . -B build && cmake --build build --target unit-tests
+cmake -S . -B build
+cmake --build build --target unit-tests
 ./build/tests/unit-tests
 ```
 
