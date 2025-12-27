@@ -5,12 +5,17 @@ Just a cpp hello world with raylib built with cmake.
 
 ### Build
 ```shell
-cmake -S . -B ./build && cmake --build build
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+cmake -S . -B ./build
+cmake --build build
 ```
 
 ### Debug
 ```shell
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/hello_world/exe
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
+gdb ./build/hello_world/exe
 ```
 
 ### Run
