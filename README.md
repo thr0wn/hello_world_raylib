@@ -1,4 +1,4 @@
-[![](https://img.shields.io/badge/c++-black?logo=c++&style=for-the-badge)](https://learnxinyminutes.com/c++/)
+[![](https://img.shields.io/badge/c++-black?logo=cplusplus&style=for-the-badge)](https://learnxinyminutes.com/c++/)
 
 <img width="287" height="284" alt="image" src="https://github.com/user-attachments/assets/1b74f362-daa6-4a58-803e-68a42d540fc3" />
 
